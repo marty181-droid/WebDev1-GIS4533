@@ -35,7 +35,7 @@
     <!-- Header at the top of the page -->
     <div class="header">
         <h1>A Mostly Basic Web Map</h1>
-        <h3>by: Your Name Here</h3>
+        <h3>by: Alex Marty</h3>
     </div>
     <div id="map" style="width: 600px; height: 400px;"></div>
     
@@ -55,6 +55,11 @@
         // Add a marker for the UMD campus
         const marker = L.marker([46.82, -92.085]).addTo(map);
         marker.bindPopup("<b>University of Minnesota Duluth</b><br>A great place to learn about GIS!").openPopup();
+
+        // Lester Park marker
+        L.marker([46.84, -92.01]).addTo(map);
+        marker.bindPopup("<b>Lester Park</b><br>Lester Park").openPopup();
+
     </script>
 </body>
 </html>
