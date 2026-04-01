@@ -29,6 +29,8 @@
     <!-- Leaflet CSS stylesheet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
+    
+
     <style></style>
 </head>
 <body>
@@ -37,7 +39,7 @@
         <h1>A Mostly Basic Web Map</h1>
         <h3>by: Alex Marty</h3>
     </div>
-    <div id="map" style="width: 600px; height: 400px;"></div>
+    <div id="map" style="width: 1200px; height: 900px;"></div>
     
     <!-- Leaflet JavaScript library -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -53,12 +55,24 @@
         }).addTo(map);
 
         // Add a marker for the UMD campus
-        const marker = L.marker([46.82, -92.085]).addTo(map);
+        marker = L.marker([46.82, -92.085]).addTo(map);
         marker.bindPopup("<b>University of Minnesota Duluth</b><br>A great place to learn about GIS!").openPopup();
 
         // Lester Park marker
-        L.marker([46.84, -92.01]).addTo(map);
+        marker = L.marker([46.84034790498843, -92.0071480625939]).addTo(map);
         marker.bindPopup("<b>Lester Park</b><br>Lester Park").openPopup();
+
+        // Hartley Nature Center marker
+        marker = L.marker([46.83792487611879, -92.08301816603239]).addTo(map);
+        marker.bindPopup("<b>Hartley Nature Center</b><br>Hartley Nature Center").openPopup();
+
+        // Lift Bridge marker
+        marker = L.marker([46.77910125651486, -92.09295224886434]).addTo(map);
+        
+        // HTML content
+        const htmlContent = "<br><b>CSL Whitefish Bay leaving Duluth under the Aerial Lift Bridge</b><img height = '150' src = 'https://circuitdulacsuperieur.info/wp-content/uploads/2020/11/Duluth-Aerial-Lift-Bridge-Adam-Jagunich.jpeg'/>"
+
+        marker.bindPopup(htmlContent).openPopup();
 
     </script>
 </body>
