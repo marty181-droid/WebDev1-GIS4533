@@ -31,13 +31,36 @@
     
     
 
-    <style></style>
+    <style>
+        h1 {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            color: rgb(63, 63, 151);
+        }
+
+        h3 {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            color: rgb(26, 92, 26);
+        }
+
+        p {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        map {
+            
+        }
+    </style>
 </head>
 <body>
     <!-- Header at the top of the page -->
     <div class="header">
-        <h1>A Mostly Basic Web Map</h1>
-        <h3>by: Alex Marty</h3>
+        <h1>Some of My Favorite Locations Around Duluth</h1>
+        <h3>Created by Alex Marty</h3>
+        <p>In this map, I've added some of my favorite places to go in the city of Duluth, Minnesota. A preexisting point is located at UMD where I go to major in GIS. 
+            I've also added Lester Park and Hartley Nature Center which are great places to go to get out in nautre in such a busy urban environemnt. 
+            I also love to go to the Aerial Lift Bridge in Canal Park to watch boats arrive to Duluth. I commonly go with my friend and keep a close eye on the ship tracker. 
+            These are all fairly close to where i live and I can take a quick drive to them or use the bus.
+        </p>
     </div>
     <div id="map" style="width: 1200px; height: 900px;"></div>
     
@@ -46,7 +69,7 @@
     
     <script>
         // Initialize the map, center it on UMD campus, and set the zoom level
-        const map = L.map('map').setView([46.82, -92.08], 13);
+        const map = L.map('map').setView([46.75339497172788, -92.12366511979756], 12);
 
         // Add OpenStreetMap tiles
         const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -56,23 +79,21 @@
 
         // Add a marker for the UMD campus
         marker = L.marker([46.82, -92.085]).addTo(map);
-        marker.bindPopup("<b>University of Minnesota Duluth</b><br>A great place to learn about GIS!").openPopup();
+        marker.bindPopup("<b>University of Minnesota Duluth</b><br>A great place to learn about GIS!");
 
         // Lester Park marker
         marker = L.marker([46.84034790498843, -92.0071480625939]).addTo(map);
-        marker.bindPopup("<b>Lester Park</b><br>Lester Park").openPopup();
+        marker.bindPopup("<b>Lester Park</b><br>Scenic city park with rivers and streams as well as hiking, mountain biking, and skiing trails.");
 
         // Hartley Nature Center marker
         marker = L.marker([46.83792487611879, -92.08301816603239]).addTo(map);
-        marker.bindPopup("<b>Hartley Nature Center</b><br>Hartley Nature Center").openPopup();
+        marker.bindPopup("<b>Hartley Nature Center</b><br>Natural area within a developed area of Duluth that offers beautiful nature trails for recreation and nature ad conservation classes for young kids.");
 
         // Lift Bridge marker
         marker = L.marker([46.77910125651486, -92.09295224886434]).addTo(map);
-        
         // HTML content
-        const htmlContent = "<br><b>CSL Whitefish Bay leaving Duluth under the Aerial Lift Bridge</b><img height = '150' src = 'https://circuitdulacsuperieur.info/wp-content/uploads/2020/11/Duluth-Aerial-Lift-Bridge-Adam-Jagunich.jpeg'/>"
-
-        marker.bindPopup(htmlContent).openPopup();
+        const htmlContent = "<br><b>Aerial Lift Bridge<br></b>Historic lift bridge connecting the Park Point sandbar to the rest of Duluth. A great place to watch ships transit the canal to and from Lake Superior. <br><br>In this image, CSL Whitefish Bay is leaving Duluth under the Aerial Lift Bridge<img height = '150' src = 'https://circuitdulacsuperieur.info/wp-content/uploads/2020/11/Duluth-Aerial-Lift-Bridge-Adam-Jagunich.jpeg'/>"
+        marker.bindPopup(htmlContent);
 
     </script>
 </body>
