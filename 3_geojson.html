@@ -62,8 +62,16 @@
     <div id="map" style="width: 600px; height: 400px;"></div>
     
     <!-- Leaflet JavaScript -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">        
+        function attendanceAreasStyle() {
+            return {
+                color: "black",
+                weight: 2,
+                fillOpacity: 0.5,
+            }
+        }
+    </script>
+
     <script>
         // Initialize the map, center it on UMD campus, and set the zoom level
         const map = L.map('map').setView([46.82, -92.08], 13);
@@ -79,24 +87,14 @@
         //Fetch GeoJSON file
         fetch("duluth_school_attendance_areas.json")
             .then(function(response) {
-                return response.json()
+                return response.json();
             })
-            .then(function(data) {
-                console.log(data)
-                
-            })
-            // Take the json data (our geojson file's data
-            // And create a leaflet layer based on that geojson)
-            .then(function(geojsonData) {
-                console.log('geojsonData')
-                L.geoJSON(geojsondata).addTo(map)
-            })
+        // L.geoJSON(attendanceAreasGeojson)    
+            .then(function(jsondata) {
+                L.geoJSON(jsondata).addTo(map);
+            });
 
-            
 
-            .then(response => console.log('attendance areas json', response.json()))
-
-        // L.geoJSON(attendanceAreasGeojson)
     </script>
 </body>
 </html>
