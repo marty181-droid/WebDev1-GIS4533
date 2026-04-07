@@ -63,16 +63,18 @@
     
     <!-- Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">        
-        function attendanceAreasStyle() {
-            return {
-                color: "black",
-                weight: 2,
-                fillOpacity: 0.5,
-            }
-        }
+        
     </script>
 
     <script>
+        function attendanceAreasStyle(feature) {
+            return {
+                color: "black",        // border color
+                weight: 2,             // border thickness
+                fillColor: getRandomColor(), // random fill color
+                fillOpacity: 0.5
+            };
+        }
         // Initialize the map, center it on UMD campus, and set the zoom level
         const map = L.map('map').setView([46.82, -92.08], 13);
 
@@ -82,6 +84,15 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
+        // This function generates a random hex color
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
         // Add GeoJSON of Attendance Areas to the map
 
         //Fetch GeoJSON file
@@ -91,7 +102,9 @@
             })
         // L.geoJSON(attendanceAreasGeojson)    
             .then(function(jsondata) {
-                L.geoJSON(jsondata).addTo(map);
+                L.geoJSON(jsondata, {
+                    style: attendanceAreasStyle
+                }).addTo(map);
             });
 
 
