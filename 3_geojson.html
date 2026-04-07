@@ -103,11 +103,12 @@
         // L.geoJSON(attendanceAreasGeojson)    
             .then(function(jsondata) {
                 L.geoJSON(jsondata, {
-                    style: attendanceAreasStyle
+                    style: attendanceAreasStyle,
+                    onEachFeature: function(feature, layer) {
+                        layer.bindPopup(feature.properties.ELEM_NAME);
+                    }
                 }).addTo(map);
             });
-
-
     </script>
 </body>
 </html>
