@@ -56,11 +56,27 @@
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
-    <style></style>
+    <style>
+        h1 {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            color: black;
+        }
+
+        h2 {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            color: darkblue;
+        }
+    </style>
 </head>
 <body>
-    <div id="map" style="width: 600px; height: 400px;"></div>
+    <div id="header">
+        <h1>Attendance Areas of Duluth Schools</h1>
+        <h2>Areas will display the name of the school it is associated with</h2>
+    </div>
+    <div id="map" style="width: 1200px; height: 800px;"></div>
     
+    
+
     <!-- Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">        
         
