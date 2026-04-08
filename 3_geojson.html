@@ -62,27 +62,37 @@
             color: black;
         }
 
-        h2 {
+        h3 {
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             color: darkblue;
+        }
+
+        map {
+            border: 4px black;
         }
     </style>
 </head>
 <body>
-    <div id="header">
+    <!-- Customizing the header-->
+    <div id="header" style="
+        text-align: center;">
         <h1>Attendance Areas of Duluth Schools</h1>
-        <h2>Areas will display the name of the school it is associated with</h2>
+        <h3>Popups will display the name of the school the attendance area is associated with</h3>
     </div>
-    <div id="map" style="width: 1200px; height: 800px;"></div>
+    <!-- Map position and size --> 
+    <div id="map" style="
+        width: 1200px; 
+        height: 800px; 
+        position: absolute;
+        left: 25%"></div>
     
-    
-
     <!-- Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">        
         
     </script>
 
     <script>
+    // Randomized colors for attendance areas
         function attendanceAreasStyle(feature) {
             return {
                 color: "black",        // border color
@@ -91,16 +101,18 @@
                 fillOpacity: 0.5
             };
         }
-        // Initialize the map, center it on UMD campus, and set the zoom level
-        const map = L.map('map').setView([46.82, -92.08], 13);
+        // Initialize the map, center it on Duluth, and set the zoom level
+        const map = L.map('map').setView([46.75339497172788, -92.12366511979756], 11);
 
-        // Add OpenStreetMap tiles
-        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
+        // Change basemap
+        var CartoDB_Positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+	        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+	        subdomains: 'abcd',
+	        maxZoom: 20
+        })
+            .addTo(map);
 
-        // This function generates a random hex color
+        // Random color generator
         function getRandomColor() {
             const letters = '0123456789ABCDEF';
             let color = '#';
@@ -110,7 +122,6 @@
             return color;
         }
         // Add GeoJSON of Attendance Areas to the map
-
         //Fetch GeoJSON file
         fetch("duluth_school_attendance_areas.json")
             .then(function(response) {
