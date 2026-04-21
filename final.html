@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <title>Duluth Attractions</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <style>
+        h1 {
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            color: black;
+        }
+        h3 {
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top page header -->
+    <div class="header">
+        <h1>Duluth Attractions</h1>
+        <h3>Final Project by Alex Marty</h3>
+    </div>
+    <div id="map" style="width: 1200px; height: 900px"></div>
+
+<!-- leaflet map tile -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+    // Initialize the map, center it on UMD campus, and set the zoom level
+    const map = L.map('map').setView([46.75339497172788, -92.12366511979756], 12);
+
+    // Add OpenStreetMap tiles
+    const tiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}{r}.{ext}', {
+        minZoom: 0,    
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a>',
+        ext: 'png'
+    }).addTo(map);
+</script>
+
+</body>
