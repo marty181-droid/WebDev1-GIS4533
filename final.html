@@ -10,11 +10,15 @@
     <style>
         h1 {
             font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-            color: black;
+            color: rgb(11, 11, 150);
         }
         h3 {
             font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-            color: black;
+            color: rgb(14, 129, 10);
+        }
+        p {
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            color: rgb(180, 65, 12);
         }
     </style>
 </head>
@@ -23,23 +27,105 @@
     <div class="header">
         <h1>Duluth Attractions</h1>
         <h3>Final Project by Alex Marty</h3>
+        <p>Welcome to my map! Here, you will find a map of the city of Duluth with several points scattered all over in places that are worth visiting while you're here. It includes activities like walking in nature, shopping, and seeing historical places that have shaped Duluth. Green pins represent nature areas, red pins are for structures, yellow pins are for historic places, and blue pins are for shopping and food!</p>
     </div>
-    <div id="map" style="width: 1200px; height: 900px"></div>
+    <div id="map" style="width: 100%; height: 100vh"></div>
 
-<!-- leaflet map tile -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- leaflet map tile -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<script>
-    // Initialize the map, center it on UMD campus, and set the zoom level
-    const map = L.map('map').setView([46.75339497172788, -92.12366511979756], 12);
+    <script>
+        // Initialize the map, center it on UMD campus, and set the zoom level
+        const map = L.map('map').setView([46.75339497172788, -92.12366511979756], 12);
 
-    // Add OpenStreetMap tiles
-    const tiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}{r}.{ext}', {
-        minZoom: 0,    
-        maxZoom: 19,
-        attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a>',
-        ext: 'png'
-    }).addTo(map);
-</script>
+        // Add OpenStreetMap tiles
+        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
 
+        // Add push pin icons (Red pin)
+        var structure = L.icon({
+            iconUrl: 'push-pin-svgrepo-com.svg', 
+            // size of the icon
+            iconSize:    [50, 64], // size of the icon
+            shadowSize:   [50, 64], // size of the shadow
+            iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+            shadowAnchor: [4, 62],  // the same for the shadow
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+
+        // (Green pin)
+        var nature = L.icon({
+            iconUrl: 'push-pin-attachment-svgrepo-com.svg', 
+            // size of the icon
+            iconSize:    [50, 64], // size of the icon
+            shadowSize:   [50, 64], // size of the shadow
+            iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+            shadowAnchor: [4, 62],  // the same for the shadow
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+
+        // (Yellow pin)
+        var historic = L.icon({
+            iconUrl: 'push-pin-svgrepo-com (1).svg', 
+            // size of the icon
+            iconSize:    [50, 64], // size of the icon
+            shadowSize:   [50, 64], // size of the shadow
+            iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+            shadowAnchor: [4, 62],  // the same for the shadow
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+
+        // (Blue pin)
+        var shopping = L.icon({
+            iconUrl: 'push-pin-svgrepo-com (2).svg', 
+            // size of the icon
+            iconSize:    [50, 64], // size of the icon
+            shadowSize:   [50, 64], // size of the shadow
+            iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+            shadowAnchor: [4, 62],  // the same for the shadow
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+
+        // Lester park marker
+        const lesterParkMarker = L.marker([46.84037011562576, -92.00723422788847], {icon: nature}).addTo(map);
+        lesterParkMarker.bindPopup("<b>Lester Park</b><br>A beautiful park with trails, a golf course, and a beach on Lake Superior.<img height = '150' src = 'https://lakesuperiorcircletour.info/wp-content/uploads/2020/11/Amity-Creek-Duluth.jpg'>").openPopup();
+
+        // Hartley nature center marker
+        const HartleyMarker = L.marker([46.83792487611879, -92.08301816603239], {icon: nature}).addTo(map);
+        HartleyMarker.bindPopup("<b>Hartley Nature Center</b><br>A nature center with trails, wildlife exhibits, and educational programs.<img height = '150' src = 'https://www.cleanegroup.org/wp-content/uploads/hartley-image-900x643.jpg'>").openPopup();
+
+        //Fitgers marker
+        const fitgersMarker = L.marker([46.792339091779006, -92.09077622456715], {icon: historic}).addTo(map);
+        fitgersMarker.bindPopup("<b>Fitger's Brewery</b><br>A historic brewery with a restaurant, shops, and a hotel.<img height = '150' src = 'https://inn.fitgers.com/wp-content/uploads/2024/09/FITGERS-new.webp'>").openPopup();
+
+        // Glensheen marker
+        const glensheenMarker = L.marker([46.81521098871746, -92.05172945210593], {icon: historic}).addTo(map);
+        glensheenMarker.bindPopup("<b>Glensheen Mansion</b><br>A historic mansion with beautiful gardens and a museum.<img height = '150' src = 'https://mspmag.com/downloads/72713/download/glensheen.jpg?cb=10ba247a1d283b4bfc6a42595f53519c&w=1200'>").openPopup();
+
+        // Bayfront Festival Park marker
+        const bayfrontMarker = L.marker([46.77788128322232, -92.1021806424762], {icon: nature}).addTo(map);
+        bayfrontMarker.bindPopup("<b>Bayfront Festival Park</b><br>A park with a stage for concerts, a playground, and beautiful views of Lake Superior.<img height = '150' src = 'https://static.wixstatic.com/media/a62627_e51c984d337c4808a9153c4b075e44d2~mv2.png/v1/fill/w_1904,h_1071,al_c,q_95,usm_0.66_1.00_0.01,enc_avif,quality_auto/Header.png'>").openPopup();
+
+        // Aerial Lift Bridge marker
+        const liftBridgeMarker = L.marker([46.77903406702409, -92.09290086498054], {icon: structure}).addTo(map);
+        liftBridgeMarker.bindPopup("<b>Aerial Lift Bridge</b><br>A famous landmark in Duluth that connects the city to the Park Point neighborhood.<img height = '150' src = 'https://circuitdulacsuperieur.info/wp-content/uploads/2020/11/Duluth-Aerial-Lift-Bridge-Adam-Jagunich.jpeg'>").openPopup();
+
+        // Enger Tower and Park marker
+        const engerTowerMarker = L.marker([46.776112072223, -92.12493089506998], {icon: structure}).addTo(map);
+        engerTowerMarker.bindPopup("<b>Enger Tower</b><br>A tower with panoramic views of Duluth and Lake Superior.<img height = '150' src = 'https://visitduluth.com/wp-content/uploads/2023/07/DLTH21_FallShoot-MH_EngerTower_2-1-scaled.jpg'>").openPopup();
+
+        // Park Point marker
+        const parkPointMarker = L.marker([46.73034882813639, -92.05255334419299], {icon: nature}).addTo(map);
+        parkPointMarker.bindPopup("<b>Park Point</b><br>A long, narrow sandbar that extends into Lake Superior, with a beach and a campground.<img height = '150' src = 'https://img.apmcdn.org/a30d36501a8ab29bd448b8f06e73e4b3b7f15ea1/uncropped/675bd7-20200902-park-point-12.jpg'>").openPopup();
+
+        // Downtown Duluth marker
+        const downtownMarker = L.marker([46.78695148120339, -92.09819251011639], {icon: shopping}).addTo(map);
+        downtownMarker.bindPopup("<b>Downtown Duluth</b><br>This area has lots of interesting small businesses lined along Superior street and features Duluth famous skyway system, connecting buildings together so people don't need to venture outside in the bitter cold winters.<img height = '150' src = 'https://media.licdn.com/dms/image/v2/D4E1BAQFFsdk0zDOMGg/company-background_10000/company-background_10000/0/1653598542371/downtown_duluth_cover?e=2147483647&v=beta&t=LESyFrvuVJK7fk-hKOU_KlLVeQRrRkhjn6OCZ0vfcQ8'>").openPopup();
+
+        // Lincoln park marker
+        const lincolnParkMarker = L.marker([46.76887149146598, -92.12178976253175], {icon: shopping}).addTo(map);
+        lincolnParkMarker.bindPopup("<b>Lincoln Park</b><br>This area has lots of new small businesses that sell art, goods, and some great eating options. Be sure to check out Love Creamery!<img height = '150' src = 'https://northshoreexplorermn.com/wp-content/uploads/2022/01/08-24-2021-Lincoln-Park-2-2-REV-MD-2-scaled-1.jpg'>").openPopup();
+    </script>
 </body>
